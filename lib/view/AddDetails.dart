@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/MyTextBox.dart';
 
@@ -141,6 +142,11 @@ class _AddDetailsState extends State<AddDetails> {
                     );
                   }
                   else{
+
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString("fname", name);
+                    prefs.setString("femail", email);
+
                     await FirebaseFirestore.instance.collection("Register").add({
                       "name":name,
                       "email":email,
